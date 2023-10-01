@@ -1,0 +1,34 @@
+@model Category
+<div class="text-center fs-3 ">
+    <a href="/" class="link-dark">Product </a><a href="/category" class="link-dark"> Categories</a>
+</div>
+<div class="row text-center">
+    
+    <div class="col mt-5">
+        <h4>New category</h4>
+        <form action="/category/add" method="post">
+        <div class="row g-3 align-items-center">
+            <div class="col">
+                <label  class="col-form-label">Name:</label>
+            </div>
+            <div class="col">
+                <input type="text" asp-for="Name" class="form-control" >
+            </div>
+        </div>
+        <input type="submit" value="Create" class="btn btn-success mt-5">
+        </form>
+    </div>
+    
+    <div class="col d-flex justify-content-center " style="height: 4 00px;">
+        <div class="vr"></div>
+    </div>
+
+    <div class="col mt-5">
+        <h4>All Categories</h4>
+        @foreach(var c in ViewBag.All_Categories)
+        {
+            <li><a href="/category/@c.CategoryId">@c.Name</a></li>
+        }
+
+    </div>
+</div>

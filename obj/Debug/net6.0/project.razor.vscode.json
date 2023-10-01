@@ -23719,6 +23719,16 @@
       "FilePath": "c:\\Users\\belai\\OneDrive\\Bureau\\c#\\ORMs\\ProductsAndCategories\\Views\\Shared\\Error.cshtml",
       "TargetPath": "Views\\Shared\\Error.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\belai\\OneDrive\\Bureau\\c#\\ORMs\\ProductsAndCategories\\Views\\Home\\Category.cshtml",
+      "TargetPath": "Views\\Home\\Category.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "c:\\Users\\belai\\OneDrive\\Bureau\\c#\\ORMs\\ProductsAndCategories\\Views\\Home\\OneProduct.cshtml",
+      "TargetPath": "Views\\Home\\OneProduct.cshtml",
+      "FileKind": "mvc"
     }
   ]
 }
