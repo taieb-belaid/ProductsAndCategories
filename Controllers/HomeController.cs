@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProductsAndCategories.Models;
 
 namespace ProductsAndCategories.Controllers;
@@ -52,15 +53,38 @@ public class HomeController : Controller
         }
         return View("category");
     }
-    //__________One_Product___
+    //__________One_Product________________
     [HttpGet("/product/{ProductId}")]
     public IActionResult OneProduct(int ProductId)
     {
         ViewBag.One_Product = _context.Products.SingleOrDefault(p=>p.ProductId == ProductId);
+        ViewBag.ProductHasCategory = _context.Products
+                                    .Include(p=>p.ProductBelong)
+                                    .ThenInclude(a=>a.Category)
+                                    .FirstOrDefault(p=>p.ProductId==ProductId);
         ViewData["All_Category"] = _context.Categories.ToList();
         return View();
     }
-    //________________________   
+    //____________One_Category______________
+    [HttpGet("/category/{CategoryId}")]
+    public IActionResult OneCategory(int CategoryId)
+    {
+        ViewBag.One_Category = _context.Categories.FirstOrDefault(c=>c.CategoryId==CategoryId);
+        ViewBag.CategoryHasProduct = _context.Categories
+                                    .Include(c=>c.CategoryHave)
+                                    .ThenInclude(a=>a.Product)
+                                    .FirstOrDefault(p=>p.CategoryId==CategoryId);
+        ViewData["All_Product"] = _context.Products.ToList();
+        return View();
+    }
+    //____________Add_Association___________  
+    [HttpPost("/association")]
+    public IActionResult Association(Association newAssociation)
+    {
+            _context.Associations.Add(newAssociation);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+    } 
     public IActionResult Privacy()
     {
         return View();

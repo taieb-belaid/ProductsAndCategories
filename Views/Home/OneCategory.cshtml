@@ -1,0 +1,34 @@
+@model Association
+<div class="text-center fs-3 ">
+    <a href="/" class="link-dark">Products </a><a href="/category" class="link-dark"> Categories</a>
+</div>
+<div class="row text-center mt-5">
+    <h2>@ViewBag.One_Category.Name</h2>
+</div>
+<div class="text-center mt-5">
+<div class="row">
+    <div class="col">
+        @foreach(var c in ViewBag.CategoryHasProduct.CategoryHave)
+        {
+            <li>@c.Product.Name</li>
+        }
+
+    </div>
+    <div class="col">
+        <form action="/association" method="post">
+            <input type="hidden" asp-for="CategoryId" value="@ViewBag.One_Category.CategoryId">
+            <label class="col-form-label">Categories</label>
+            <div>
+                <select asp-for="ProductId" class="selectpicker">
+                    <option value=null>--choose Product--</option>
+                    @foreach (var p in ViewData["All_Product"] as IList<Product>)
+                    {
+                        <option value="@p.ProductId">@p.Name</option>
+                    }
+                </select>
+            </div>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</div>
+</div>

@@ -5,23 +5,35 @@
 <div class="row text-center mt-5">
     <h2>@ViewBag.One_Product.Name</h2>
 </div>
-<div class="row">
-    <div class="col">
-
-    </div>
-    <div class="col">
-        <form action="/association" method="post">
-        <input type="hidden" asp-for="ProductId" value="@ViewBag.One_Product.ProductId">
-        <label class="col-form-label">Categories</label>
-        <div>
-        <select asp-for="CategoryId" class="selectpicker" >
-            <option value=null>--choose category--</option>
-            @foreach(var c in ViewData["All_Category"] as IList<Category>)
+<div class="text-center fs-5 mt-5 ">
+    <div class="row">
+        <div class="col">
+            @if (ViewBag.ProductHasCategory != null)
             {
-                <option value="@c.CategoryId">@c.Name</option>
+                @foreach (var c in ViewBag.ProductHasCategory.ProductBelong)
+                {
+                    <li>@c.Category.Name</li>
+                }
             }
-        </select>
         </div>
-        </form>
+        <div class="col">
+            <form action="/association" method="post">
+                <input type="hidden" asp-for="ProductId" value="@ViewBag.One_Product.ProductId">
+                <label class="col-form-label">Categories</label>
+                <div>
+                    <select asp-for="CategoryId" class="selectpicker">
+                        <option value=null>--choose category--</option>
+                        @if (ViewData["All_Category"] != null)
+                        {
+                            @foreach (var c in ViewData["All_Category"] as IList<Category>)
+                            {
+                                <option value="@c.CategoryId">@c.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <input type="submit" value="Add">
+            </form>
+        </div>
     </div>
 </div>
